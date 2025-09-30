@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lisiane Vecchi | Nutricionista Comportamental</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="nav-brand">
+          <img
+            src="assets/logo.png"
+            alt="Lisiane Vecchi - Nutricionista"
+            class="logo"
+          />
+          <h1>Lisiane Vecchi</h1>
+          <span>Nutricionista Comportamental</span>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="#inicio" class="nav-link">Início</a></li>
+          <li><a href="#sobre" class="nav-link">Sobre</a></li>
+          <li><a href="#acompanhamento" class="nav-link">Acompanhamento</a></li>
+          <li><a href="#atendimentos" class="nav-link">Atendimentos</a></li>
+          <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+          <li><a href="#contato" class="nav-link">Contato</a></li>
+        </ul>
+        <button class="btn btn--primary nav-cta" onclick="openModal()">
+          Agendar Conversa
+        </button>
+        <div class="hamburger" aria-label="Abrir menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section id="inicio" class="hero section-tier-dark with-food-bg">
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-text">
+              <h1 class="hero-title">
+                Uma relação mais leve com a comida é possível
+              </h1>
+              <p class="hero-subtitle">
+                Com escuta, acolhimento e estratégias reais, vamos transformar sua
+                alimentação sem restrições e sem culpa
+              </p>
+
+              <div class="hero-credentials">
+                <span><i class="fas fa-certificate"></i> CRN registrada</span>
+                <span><i class="fas fa-university"></i> Formada pela UFSM</span>
+                <span><i class="fas fa-graduation-cap"></i> Mestranda em Psicologia</span>
+                <span class="google-rating"
+                  ><i class="fas fa-star"></i> 25 avaliações 5 estrelas no
+                  Google</span
+                >
+              </div>
+
+              <div class="hero-ctas">
+                <button class="btn btn--primary btn--lg" onclick="openModal()">
+                  <i class="fas fa-calendar-check"></i>
+                  Agendar Consulta
+                </button>
+                <a href="#depoimentos" class="btn btn--ghost btn--lg"
+                  ><i class="fas fa-comment-dots"></i> Ver depoimentos</a
+                >
+              </div>
+            </div>
+
+            <div class="hero-photo">
+              <img src="assets/foto.jpeg" alt="Foto da Lisiane Vecchi" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sobre Section -->
+      <section id="sobre" class="sobre section-tier-light">
+        <div class="container">
+          <div class="sobre-grid">
+            <div class="sobre-content">
+              <span class="eyebrow">Sobre mim</span>
+              <h2 class="section-title">
+                Acolhimento, ciência e comida de verdade no centro do cuidado
+              </h2>
+              <p>
+                Sou nutricionista comportamental com mais de 10 anos de experiência
+                ajudando mulheres a transformarem sua relação com a comida sem
+                medo ou culpa.
+              </p>
+              <ul class="achievements">
+                <li>
+                  <i class="fas fa-heart"></i>
+                  Atendimento centrado em acolhimento e escuta ativa
+                </li>
+                <li>
+                  <i class="fas fa-brain"></i>
+                  Abordagem baseada em ciência e saúde mental
+                </li>
+                <li>
+                  <i class="fas fa-utensils"></i>
+                  Estratégias reais que cabem na sua rotina
+                </li>
+              </ul>
+            </div>
+
+            <div class="sobre-cards">
+              <article class="info-card">
+                <h3>Formação</h3>
+                <p>
+                  • Nutrição - UFSM<br />• Pós-graduação em Transtornos Alimentares<br />•
+                  Mestrado em Psicologia em andamento
+                </p>
+              </article>
+              <article class="info-card">
+                <h3>Abordagem</h3>
+                <p>
+                  Método baseado em comportamentos, com foco em autonomia, conexão
+                  com o corpo e relação saudável com a comida.
+                </p>
+              </article>
+              <article class="info-card">
+                <h3>Para quem é</h3>
+                <p>
+                  Mulheres que buscam cuidado nutricional sem dietas restritivas e
+                  desejam construir hábitos sustentáveis.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Como Funciona Section -->
+      <section
+        id="acompanhamento"
+        class="como-funciona section-tier-dark with-food-bg"
+      >
+        <div class="container">
+          <h2 class="section-title">Como funciona o acompanhamento?</h2>
+          <div class="passos-grid">
+            <div class="passo-card">
+              <div class="passo-numero">1</div>
+              <h3>Preparação Personalizada</h3>
+              <p>
+                Conversa pré-consulta para entender necessidades e expectativas
+                individuais.
+              </p>
+            </div>
+            <div class="passo-card">
+              <div class="passo-numero">2</div>
+              <h3>Consulta Profunda</h3>
+              <p>
+                Sessão online ou presencial com avaliação completa, escuta e
+                construção conjunta de objetivos.
+              </p>
+            </div>
+            <div class="passo-card">
+              <div class="passo-numero">3</div>
+              <h3>Plano Vivo</h3>
+              <p>
+                Definição de estratégias realistas e flexíveis, com acompanhamento
+                contínuo e ajustes semanais.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Atendimentos Section -->
+      <section id="atendimentos" class="atendimentos section-tier-dark">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">Atendimentos</span>
+            <h2 class="section-title">Escolha o cuidado que faz sentido</h2>
+          </div>
+          <div class="atendimento-grid">
+            <article class="atendimento-card">
+              <h3>Consultoria Alimentar</h3>
+              <p>
+                Sessões pontuais para ajustes na alimentação, planejamento semanal
+                e organização da rotina.
+              </p>
+              <ul>
+                <li>Plano personalizado</li>
+                <li>Ferramentas práticas</li>
+                <li>Suporte por 15 dias</li>
+              </ul>
+              <button class="btn btn--secondary" onclick="openModal()">
+                Quero conversar
+              </button>
+            </article>
+            <article class="atendimento-card destaque">
+              <h3>Acompanhamento Contínuo</h3>
+              <p>
+                Programa completo com encontros regulares, acompanhamento diário e
+                construção progressiva de hábitos.
+              </p>
+              <ul>
+                <li>Consultas quinzenais</li>
+                <li>Suporte via WhatsApp</li>
+                <li>Materiais e planos personalizados</li>
+              </ul>
+              <button class="btn btn--primary" onclick="openModal()">
+                Quero começar
+              </button>
+            </article>
+            <article class="atendimento-card">
+              <h3>Mentoria Emocional</h3>
+              <p>
+                Para quem já passou pela reeducação alimentar e quer aprofundar a
+                relação com o corpo e as emoções.
+              </p>
+              <ul>
+                <li>Encontros mensais</li>
+                <li>Foco em autoconhecimento</li>
+                <li>Integração com terapia</li>
+              </ul>
+              <button class="btn btn--secondary" onclick="openModal()">
+                Quero saber mais
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Depoimentos Section -->
+      <section id="depoimentos" class="depoimentos section-tier-light">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">Depoimentos reais</span>
+            <h2 class="section-title">O que minhas pacientes dizem</h2>
+          </div>
+          <div class="depoimentos-grid">
+            <article class="depoimento-card">
+              <div class="review-stars" aria-label="Avaliação 5 de 5">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>
+                “Profissional incrível! As consultas são cheias de acolhimento e estratégias reais que mudaram meu dia a dia.”
+              </p>
+              <span class="depoimento-author">Daniela P.</span>
+              <div class="review-source">
+                <i class="fab fa-google"></i>
+                <span>Avaliação verificada no Google</span>
+              </div>
+            </article>
+            <article class="depoimento-card">
+              <div class="review-stars" aria-label="Avaliação 5 de 5">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>
+                “Nunca imaginei que poderia comer sem culpa. A Lisiane escuta com muito carinho e me ajudou a reconectar com o meu corpo.”
+              </p>
+              <span class="depoimento-author">Letícia M.</span>
+              <div class="review-source">
+                <i class="fab fa-google"></i>
+                <span>Avaliação verificada no Google</span>
+              </div>
+            </article>
+            <article class="depoimento-card">
+              <div class="review-stars" aria-label="Avaliação 5 de 5">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>
+                “As orientações são práticas e personalizadas. Sinto que finalmente encontrei um acompanhamento que respeita minha rotina.”
+              </p>
+              <span class="depoimento-author">Gabriela R.</span>
+              <div class="review-source">
+                <i class="fab fa-google"></i>
+                <span>Avaliação verificada no Google</span>
+              </div>
+            </article>
+            <article class="depoimento-card">
+              <p>
+                “O acompanhamento personalizado fez toda diferença. Nunca me senti julgada, sempre acolhida.”
+              </p>
+              <span class="depoimento-author">Fernanda L.</span>
+            </article>
+          </div>
+          <div class="depoimentos-cta">
+            <a
+              class="btn btn--ghost"
+              href="https://www.google.com/search?q=Lisiane+Vecchi+Nutricionista"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="fab fa-google"></i>
+              Ver todas as avaliações no Google
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Final Section -->
+      <section class="cta-final section-tier-dark with-food-bg">
+        <div class="container">
+          <div class="cta-content">
+            <h2>Pronta para transformar sua relação com a comida?</h2>
+            <p>
+              Agende uma conversa inicial gratuita e descubra como posso te ajudar a
+              viver uma relação mais leve e prazerosa com a alimentação.
+            </p>
+            <button class="btn btn--primary btn--lg" onclick="openModal()">
+              Quero agendar minha conversa
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="contato" class="footer section-tier-light">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <img
+              src="assets/logo.png"
+              alt="Lisiane Vecchi - Nutricionista"
+              class="logo"
+            />
+            <h3>Lisiane Vecchi</h3>
+            <p>Nutricionista Comportamental | CRN 12345</p>
+          </div>
+          <div class="footer-contact">
+            <h4>Contato</h4>
+            <ul>
+              <li>
+                <i class="fas fa-phone"></i>
+                <a href="tel:+555199999999">(51) 99999-9999</a>
+              </li>
+              <li>
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:contato@lisianevecchi.com">
+                  contato@lisianevecchi.com
+                </a>
+              </li>
+              <li>
+                <i class="fas fa-map-marker-alt"></i>
+                Atendimentos online e presenciais em Porto Alegre - RS
+              </li>
+            </ul>
+          </div>
+          <div class="footer-social">
+            <h4>Redes Sociais</h4>
+            <div class="social-links">
+              <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+              <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2024 Lisiane Vecchi. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal" id="agendamentoModal" aria-hidden="true">
+      <div class="modal-overlay" onclick="closeModal()"></div>
+      <div class="modal-content" role="dialog" aria-modal="true">
+        <button class="modal-close" onclick="closeModal()" aria-label="Fechar">
+          &times;
+        </button>
+        <h3>Agendar uma conversa</h3>
+        <p>
+          Deixe seus dados e retornaremos em até 24 horas para combinar nossa
+          primeira conversa.
+        </p>
+        <form class="modal-form">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" required />
+
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" required />
+
+          <label for="telefone">Telefone</label>
+          <input type="tel" id="telefone" name="telefone" required />
+
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="4"></textarea>
+
+          <button type="submit" class="btn btn--primary btn--block">
+            Enviar mensagem
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
