@@ -35,6 +35,7 @@
           <li><a href="#acompanhamento" class="nav-link">Acompanhamento</a></li>
           <li><a href="#atendimentos" class="nav-link">Atendimentos</a></li>
           <li><a href="#depoimentos" class="nav-link">Depoimentos</a></li>
+          <li><a href="#localizacoes" class="nav-link">Onde estou</a></li>
           <li><a href="#contato" class="nav-link">Contato</a></li>
         </ul>
         <button class="btn btn--primary nav-cta" onclick="openModal()">
@@ -101,7 +102,7 @@
               </h2>
               <p>
                 Sou nutricionista comportamental com mais de 10 anos de experiência
-                ajudando mulheres a transformarem sua relação com a comida sem
+                ajudando pessoas a transformarem sua relação com a comida sem
                 medo ou culpa.
               </p>
               <ul class="achievements">
@@ -138,7 +139,7 @@
               <article class="info-card">
                 <h3>Para quem é</h3>
                 <p>
-                  Mulheres que buscam cuidado nutricional sem dietas restritivas e
+                  Pessoas que buscam cuidado nutricional sem dietas restritivas e
                   desejam construir hábitos sustentáveis.
                 </p>
               </article>
@@ -320,15 +321,82 @@
         </div>
       </section>
 
+      <!-- Localizações Section -->
+      <section id="localizacoes" class="localizacoes section-tier-light">
+        <div class="container">
+          <div class="section-heading">
+            <span class="eyebrow">Onde estou</span>
+            <h2 class="section-title">Consultórios para te receber</h2>
+            <p class="section-subtitle">
+              Ofereço atendimento presencial em Passo Fundo e Marau/RS, além de consultas online para todo o Brasil, levando acolhimento e estratégias reais onde quer que você esteja.
+            </p>
+          </div>
+          <div class="localizacoes-grid">
+            <article class="location-card">
+              <div class="location-map">
+                <iframe
+                  src="https://maps.google.com/maps?q=Salutem%20Cl%C3%ADnica%20Integrada%2C%20Passo%20Fundo%20-%20RS&z=15&output=embed"
+                  loading="lazy"
+                  allowfullscreen=""
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="Mapa Salutem Clínica Integrada"
+                ></iframe>
+              </div>
+              <div class="location-content">
+                <h3>Salutem Clínica Integrada</h3>
+                <p>Rua Capitão Araújo, 1245 - Passo Fundo/RS</p>
+                <a
+                  class="btn btn--ghost"
+                  href="https://www.google.com.br/maps/place/Salutem+Cl%C3%ADnica+Integrada/@-28.2722006,-52.4085774,14z"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver rota no Google Maps
+                </a>
+              </div>
+            </article>
+            <article class="location-card">
+              <div class="location-map">
+                <iframe
+                  src="https://maps.google.com/maps?q=Rua%20Bento%20Gon%C3%A7alves%2C%20427%20-%20Centro%2C%20Marau%20-%20RS&z=16&output=embed"
+                  loading="lazy"
+                  allowfullscreen=""
+                  referrerpolicy="no-referrer-when-downgrade"
+                  title="Mapa consultório Marau"
+                ></iframe>
+              </div>
+              <div class="location-content">
+                <h3>Consultório Marau</h3>
+                <p>Rua Bento Gonçalves, 427/04 - Centro - Marau/RS</p>
+                <a
+                  class="btn btn--ghost"
+                  href="https://www.google.com.br/maps/place/R.+Bento+Gon%C3%A7alves,+427+-+04+-+Centro,+Marau+-+RS,+99150-000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver rota no Google Maps
+                </a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
       <!-- CTA Final Section -->
       <section class="cta-final section-tier-dark with-food-bg">
         <div class="container">
           <div class="cta-content">
+            <span class="cta-eyebrow">convite especial</span>
             <h2>Pronta para transformar sua relação com a comida?</h2>
             <p>
               Agende uma conversa inicial gratuita e descubra como posso te ajudar a
               viver uma relação mais leve e prazerosa com a alimentação.
             </p>
+            <div class="cta-badges">
+              <span><i class="fas fa-video"></i>Atendimento online e presencial</span>
+              <span><i class="fas fa-leaf"></i>Planos 100% personalizados</span>
+              <span><i class="fas fa-heart"></i>Acompanhamento humanizado</span>
+            </div>
             <button class="btn btn--primary btn--lg" onclick="openModal()">
               Quero agendar minha conversa
             </button>
@@ -365,7 +433,7 @@
               </li>
               <li>
                 <i class="fas fa-map-marker-alt"></i>
-                Atendimentos online e presenciais em Porto Alegre - RS
+                Ofereço atendimento presencial em Passo Fundo e Marau/RS e online para todo o Brasil.
               </li>
             </ul>
           </div>
@@ -396,7 +464,7 @@
           Deixe seus dados e retornaremos em até 24 horas para combinar nossa
           primeira conversa.
         </p>
-        <form class="modal-form">
+  <form class="modal-form" id="agendamentoForm">
           <label for="nome">Nome</label>
           <input type="text" id="nome" name="nome" required />
 

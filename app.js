@@ -6,6 +6,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 const modal = document.getElementById('agendamentoModal');
 const modalOverlay = modal?.querySelector('.modal-overlay');
 const modalClose = modal?.querySelector('.modal-close');
+const modalForm = modal?.querySelector('#agendamentoForm');
 const focusableSelectors = ['a[href]', 'button', 'input', 'textarea'];
 
 // Toggle mobile menu
@@ -107,6 +108,39 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
+// Handle modal form submission redirecting to WhatsApp
+function handleModalSubmit(event) {
+  event.preventDefault();
+
+  const form = event.currentTarget;
+  const formData = new FormData(form);
+  const nome = (formData.get('nome') || '').toString().trim();
+  const email = (formData.get('email') || '').toString().trim();
+  const telefone = (formData.get('telefone') || '').toString().trim();
+  const mensagem = (formData.get('mensagem') || '').toString().trim();
+
+  const saudacaoNome = nome ? `Olá, meu nome é ${nome}` : 'Olá';
+  const detalhesContato = [
+    telefone ? `Telefone: ${telefone}` : null,
+    email ? `E-mail: ${email}` : null
+  ].filter(Boolean);
+
+  const corpoMensagem = [
+    saudacaoNome,
+    'e gostaria de agendar uma conversa.',
+    detalhesContato.length ? detalhesContato.join(' | ') : null,
+    mensagem ? `Mensagem: ${mensagem}` : null
+  ]
+    .filter(Boolean)
+    .join('\n');
+
+  const whatsappUrl = `https://wa.me/5554997000173?text=${encodeURIComponent(corpoMensagem)}`;
+
+  window.open(whatsappUrl, '_blank');
+  form.reset();
+  closeModal();
+}
+
 // Setup modal event listeners and focus trap
 function setupModal() {
   if (!modal) return;
@@ -114,6 +148,7 @@ function setupModal() {
   trapFocus(modal);
   modalOverlay?.addEventListener('click', closeModal);
   modalClose?.addEventListener('click', closeModal);
+  modalForm?.addEventListener('submit', handleModalSubmit);
 
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape' && modal.classList.contains('is-open')) {
