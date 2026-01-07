@@ -413,3 +413,35 @@ window.addEventListener('resize', refreshTestimonialsCarousel);
 // Expose modal functions to global scope
 window.openModal = openModal;
 window.closeModal = closeModal;
+
+// Generate a favicon with white background behind the logo
+function setWhiteBgFavicon() {
+  const link = document.querySelector('link[rel~="icon"]');
+  if (!link) return;
+
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.src = 'assets/logo.png';
+
+  img.onload = () => {
+    const size = 64;
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#FFD7D0';
+    ctx.fillRect(0, 0, size, size);
+
+    const ratio = Math.min(size / img.width, size / img.height);
+    const w = img.width * ratio;
+    const h = img.height * ratio;
+    const x = (size - w) / 2;
+    const y = (size - h) / 2;
+    ctx.drawImage(img, x, y, w, h);
+
+    const faviconUrl = canvas.toDataURL('image/png');
+    link.href = faviconUrl;
+  };
+}
+
+window.addEventListener('load', setWhiteBgFavicon);
