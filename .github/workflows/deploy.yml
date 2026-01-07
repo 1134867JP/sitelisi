@@ -13,6 +13,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: PLACE_ID
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -21,6 +22,8 @@ jobs:
       - name: Inject PLACE_ID
         run: |
           sed -i "s/__PLACE_ID__/${PLACE_ID}/g" index.html
+          sed -i "s/__PLACE_ID__/${PLACE_ID}/g" app.js || true
+          echo "PLACE_ID aplicado em index.html (e app.js se existir)"
         env:
           PLACE_ID: ${{ secrets.PLACE_ID }}
 
