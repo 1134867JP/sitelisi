@@ -43,6 +43,9 @@
 
   /* Transitions */
   --transition-base: 220ms ease;
+
+  /* Display typeface — elegância editorial, para títulos */
+  --font-display: 'Cormorant Garamond', 'Times New Roman', serif;
 }
 
 * {
@@ -92,6 +95,16 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Aplicação da fonte display em títulos de destaque */
+.hero-title,
+.section-title,
+.cta-content h2,
+.info-card h3,
+.passo-card h3,
+.atendimento-card h3 {
+  font-family: var(--font-display);
 }
 
 ul {
@@ -395,10 +408,11 @@ section {
 }
 
 .section-title {
-  font-size: clamp(2rem, 3vw, 2.75rem);
-  font-weight: var(--font-weight-bold);
-  line-height: 1.2;
+  font-size: clamp(2.25rem, 3.5vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.15;
   margin-bottom: 1.1rem;
+  letter-spacing: -0.01em;
 }
 
 .section-subtitle {
@@ -605,8 +619,11 @@ footer {
 }
 
 .hero-title {
-  font-size: clamp(2.4rem, 5vw, 3.6rem);
-  line-height: 1.1;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.2rem, 4vw, 3.3rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
 }
 
 .hero-subtitle {
@@ -714,7 +731,8 @@ footer {
 }
 
 .info-card h3 {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
+  font-weight: 600;
   margin-bottom: 0.75rem;
   color: var(--brand-primary);
 }
@@ -764,7 +782,8 @@ footer {
 
 .passo-card h3 {
   margin-top: 1.8rem;
-  font-size: 1.2rem;
+  font-size: 1.35rem;
+  font-weight: 600;
   margin-bottom: 0.75rem;
 }
 
@@ -796,7 +815,8 @@ footer {
 
 
 .atendimento-card h3 {
-  font-size: 1.25rem;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .atendimento-card p {
@@ -1057,8 +1077,10 @@ footer {
 }
 
 .cta-content h2 {
-  font-size: clamp(2.25rem, 4vw, 3.2rem);
-  line-height: 1.12;
+  font-size: clamp(2.5rem, 4.5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
   color: var(--brand-deep);
 }
 
@@ -1610,7 +1632,7 @@ footer {
   }
 
   .hero-title {
-    font-size: clamp(2rem, 8vw, 2.6rem);
+    font-size: clamp(1.95rem, 7.5vw, 2.5rem);
   }
 
   .hero-subtitle {
