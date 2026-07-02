@@ -512,7 +512,7 @@
             if (place.url && link) link.href = place.url;
             else if (link) link.href = FALLBACK_URL;
 
-            const reviews = (place.reviews || []).slice(0, 3);
+            const reviews = (place.reviews || []).slice(0, 5);
             if (!reviews.length) {
               container.innerHTML =
                 '<p class="section-subtitle" style="text-align:center">Ainda não há avaliações públicas disponíveis.</p>';

@@ -132,48 +132,57 @@ ul {
   }
 }
 
+/* Depoimentos carousel: mostra um depoimento por vez e troca sozinho */
 .depoimentos-grid.carousel-enabled {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 0 1rem;
-  margin: 0;
-  scrollbar-width: none;
+  position: relative;
+  display: block;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0;
   background: transparent;
 }
 
-.depoimentos-grid.carousel-enabled::-webkit-scrollbar {
-  display: none;
-}
-
 .depoimentos-grid.carousel-enabled .depoimento-card {
-  flex: 0 0 86%;
-  scroll-snap-align: start;
-  transition: transform 260ms ease, box-shadow 260ms ease, opacity 240ms ease;
-  opacity: 0.92;
-  transform: translateX(0) scale(0.985);
+  display: none;
   background: rgba(255, 255, 255, 0.88);
-  box-shadow: none;
 }
 
 .depoimentos-grid.carousel-enabled .depoimento-card.is-active {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-  box-shadow: none;
+  animation: testimonialFade 480ms ease;
 }
 
 /* Override for Google reviews cards when carousel is active (higher specificity than base rule) */
 #google-reviews.carousel-enabled .depoimento-card {
+  display: none;
+}
+
+#google-reviews.carousel-enabled .depoimento-card.is-active {
   display: grid;
+}
+
+@keyframes testimonialFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .depoimentos-grid.carousel-enabled .depoimento-card.is-active {
+    animation: none;
+  }
 }
 
 .testimonial-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1rem;
+  gap: 1.1rem;
+  margin-top: 1.5rem;
 }
 
 .testimonial-nav button {
@@ -196,24 +205,34 @@ ul {
   box-shadow: var(--shadow-card);
 }
 
-@media (min-width: 769px) {
-  .depoimentos-grid.carousel-enabled {
-    display: grid;
-    overflow: visible;
-    margin: 0;
-    padding: 0;
-  }
+.testimonial-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
 
-  .depoimentos-grid.carousel-enabled .depoimento-card {
-    flex: initial;
-    opacity: 1;
-    transform: none;
-    box-shadow: var(--shadow-soft);
-  }
+.testimonial-dots button {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(2, 35, 73, 0.2);
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
 
-  .testimonial-nav {
-    display: none;
-  }
+.testimonial-dots button.is-active {
+  background: var(--brand-primary);
+  transform: scale(1.25);
+}
+
+.section-tier-dark .testimonial-dots button {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.section-tier-dark .testimonial-dots button.is-active {
+  background: var(--brand-lighter);
 }
 
 .container {

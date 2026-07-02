@@ -22,17 +22,25 @@ const revealTargetsSelector = [
 ].join(',');
 
 // Testimonial carousel state
+const TESTIMONIAL_AUTOPLAY_MS = 6000;
+
 const testimonialState = {
   enabled: false,
   current: 0,
   cards: [],
   container: null,
   nav: null,
+  dots: [],
+  autoplayTimer: null,
   touchStartX: 0,
   touchEndX: 0
 };
 
 let lastTapTime = 0;
+
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
 
 // Toggle mobile menu
 function toggleMobileMenu() {
@@ -245,12 +253,8 @@ function setupScrollReveal() {
   });
 }
 
-// Testimonials carousel (mobile)
-function isMobileViewport() {
-  return window.matchMedia('(max-width: 768px)').matches;
-}
-
-function createTestimonialNav() {
+// Testimonials carousel — troca o depoimento automaticamente
+function createTestimonialNav(count) {
   const nav = document.createElement('div');
   nav.className = 'testimonial-nav';
 
@@ -259,28 +263,59 @@ function createTestimonialNav() {
   prev.setAttribute('aria-label', 'Depoimento anterior');
   prev.textContent = '‹';
 
+  const dots = document.createElement('div');
+  dots.className = 'testimonial-dots';
+  const dotButtons = Array.from({ length: count }, (_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Ir para depoimento ${i + 1}`);
+    dots.appendChild(dot);
+    return dot;
+  });
+
   const next = document.createElement('button');
   next.type = 'button';
   next.setAttribute('aria-label', 'Próximo depoimento');
   next.textContent = '›';
 
-  nav.append(prev, next);
-  return { nav, prev, next };
+  nav.append(prev, dots, next);
+  return { nav, prev, next, dotButtons };
 }
 
 function showTestimonial(index) {
   testimonialState.cards.forEach((card, i) => {
     card.classList.toggle('is-active', i === index);
   });
-
-  const active = testimonialState.cards[index];
-  if (active && testimonialState.container) {
-    // Align slightly before start so arrows feel like they move the card
-    const offset = 12;
-    const left = active.offsetLeft - offset;
-    testimonialState.container.scrollTo({ left, behavior: 'smooth' });
-  }
+  testimonialState.dots.forEach((dot, i) => {
+    dot.classList.toggle('is-active', i === index);
+  });
   testimonialState.current = index;
+}
+
+function goToTestimonial(index) {
+  showTestimonial(index);
+  restartAutoplay();
+}
+
+function startAutoplay() {
+  stopAutoplay();
+  if (prefersReducedMotion() || testimonialState.cards.length <= 1) return;
+
+  testimonialState.autoplayTimer = window.setInterval(() => {
+    const nextIndex = (testimonialState.current + 1) % testimonialState.cards.length;
+    showTestimonial(nextIndex);
+  }, TESTIMONIAL_AUTOPLAY_MS);
+}
+
+function stopAutoplay() {
+  if (testimonialState.autoplayTimer) {
+    window.clearInterval(testimonialState.autoplayTimer);
+    testimonialState.autoplayTimer = null;
+  }
+}
+
+function restartAutoplay() {
+  startAutoplay();
 }
 
 function enableTestimonialsCarousel() {
@@ -295,23 +330,29 @@ function enableTestimonialsCarousel() {
 
   container.classList.add('carousel-enabled');
 
-  const { nav, prev, next } = createTestimonialNav();
+  const { nav, prev, next, dotButtons } = createTestimonialNav(cards.length);
   testimonialState.nav = nav;
+  testimonialState.dots = dotButtons;
   container.insertAdjacentElement('afterend', nav);
 
   prev.addEventListener('click', () => {
-    const nextIndex = (testimonialState.current - 1 + cards.length) % cards.length;
-    showTestimonial(nextIndex);
+    const prevIndex = (testimonialState.current - 1 + cards.length) % cards.length;
+    goToTestimonial(prevIndex);
   });
 
   next.addEventListener('click', () => {
     const nextIndex = (testimonialState.current + 1) % cards.length;
-    showTestimonial(nextIndex);
+    goToTestimonial(nextIndex);
+  });
+
+  dotButtons.forEach((dot, i) => {
+    dot.addEventListener('click', () => goToTestimonial(i));
   });
 
   // Touch swipe support
   const touchStart = event => {
     testimonialState.touchStartX = event.changedTouches[0].screenX;
+    stopAutoplay();
   };
 
   const touchEnd = event => {
@@ -319,61 +360,99 @@ function enableTestimonialsCarousel() {
     const delta = testimonialState.touchEndX - testimonialState.touchStartX;
     const threshold = 40; // px
 
-    if (Math.abs(delta) < threshold) return;
-
-    if (delta < 0) {
-      // swipe left -> next
-      const nextIndex = (testimonialState.current + 1) % cards.length;
-      showTestimonial(nextIndex);
-    } else {
-      // swipe right -> prev
-      const prevIndex = (testimonialState.current - 1 + cards.length) % cards.length;
-      showTestimonial(prevIndex);
+    if (Math.abs(delta) >= threshold) {
+      if (delta < 0) {
+        // swipe left -> next
+        const nextIndex = (testimonialState.current + 1) % cards.length;
+        showTestimonial(nextIndex);
+      } else {
+        // swipe right -> prev
+        const prevIndex = (testimonialState.current - 1 + cards.length) % cards.length;
+        showTestimonial(prevIndex);
+      }
     }
+
+    restartAutoplay();
   };
 
   container.addEventListener('touchstart', touchStart, { passive: true });
   container.addEventListener('touchend', touchEnd, { passive: true });
   testimonialState.touchHandlers = { touchStart, touchEnd };
 
+  // Pause autoplay while the user is engaging with the carousel
+  const pause = () => stopAutoplay();
+  const resume = () => restartAutoplay();
+  container.addEventListener('mouseenter', pause);
+  container.addEventListener('mouseleave', resume);
+  nav.addEventListener('mouseenter', pause);
+  nav.addEventListener('mouseleave', resume);
+  testimonialState.hoverHandlers = { pause, resume };
+
+  // Pause when the tab isn't visible so it doesn't jump ahead
+  const visibilityHandler = () => {
+    if (document.hidden) stopAutoplay();
+    else restartAutoplay();
+  };
+  document.addEventListener('visibilitychange', visibilityHandler);
+  testimonialState.visibilityHandler = visibilityHandler;
+
   showTestimonial(0);
   testimonialState.enabled = true;
+  startAutoplay();
 }
 
 function disableTestimonialsCarousel() {
   if (!testimonialState.enabled) return;
 
+  stopAutoplay();
   testimonialState.container?.classList.remove('carousel-enabled');
   testimonialState.cards.forEach(card => card.classList.remove('is-active'));
   testimonialState.nav?.remove();
 
-   // Remove touch listeners if any
-  if (testimonialState.touchHandlers && testimonialState.container) {
+  const container = testimonialState.container;
+
+  if (testimonialState.touchHandlers && container) {
     const { touchStart, touchEnd } = testimonialState.touchHandlers;
-    testimonialState.container.removeEventListener('touchstart', touchStart);
-    testimonialState.container.removeEventListener('touchend', touchEnd);
+    container.removeEventListener('touchstart', touchStart);
+    container.removeEventListener('touchend', touchEnd);
+  }
+
+  if (testimonialState.hoverHandlers && container) {
+    const { pause, resume } = testimonialState.hoverHandlers;
+    container.removeEventListener('mouseenter', pause);
+    container.removeEventListener('mouseleave', resume);
+  }
+
+  if (testimonialState.visibilityHandler) {
+    document.removeEventListener('visibilitychange', testimonialState.visibilityHandler);
   }
 
   testimonialState.enabled = false;
   testimonialState.current = 0;
   testimonialState.nav = null;
+  testimonialState.dots = [];
   testimonialState.touchHandlers = null;
+  testimonialState.hoverHandlers = null;
+  testimonialState.visibilityHandler = null;
 }
 
 function refreshTestimonialsCarousel() {
   const container = document.getElementById('google-reviews');
   if (!container) return;
 
-  // If cards not yet loaded, skip
   const cards = Array.from(container.querySelectorAll('.depoimento-card'));
   if (!cards.length) return;
 
-  testimonialState.cards = cards;
+  // Rebuild if the set of cards changed (e.g. reviews loaded after init)
+  const sameCards = cards.length === testimonialState.cards.length &&
+    cards.every((card, i) => card === testimonialState.cards[i]);
 
-  if (isMobileViewport()) {
-    if (!testimonialState.enabled) enableTestimonialsCarousel();
-  } else {
+  if (testimonialState.enabled && !sameCards) {
     disableTestimonialsCarousel();
+  }
+
+  if (!testimonialState.enabled) {
+    enableTestimonialsCarousel();
   }
 }
 
